@@ -72,43 +72,39 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
+SAITAMA_IMG = "https://telegra.ph/file/3594cdbeb38f445d205a0.mp4"
+YUMEKOIMGSTART = "https://telegra.ph/file/c835ca34ab94668ac4f0e.mp4"
+
 
 PM_START_TEXT = """
-`Heya` 🤗 `I am` **INNEXIA** `your group super bot`
-`I am very fast and  more efficient  I provide awesome  features which a owner will look for  filter ,warn system,note keeping system flood!`
+Hello {},
+*𝓂𝓎  𝓃𝒶𝓂ℯ  𝒾𝓈  𝓎𝓊𝓂ℯ𝓀ℴ  𝒿𝒶𝒷𝒶𝓂𝒾
+𝒾  𝒶𝓂  𝒶  𝓅𝓈𝒽𝓎𝒸𝒽ℴ  ℊ𝒶𝓂𝒷𝓁ℯ𝓇  𝓌𝒽ℴ  𝓁ℴ𝓋ℯ𝓈  𝓉ℴ  ℊ𝒶𝓂𝒷𝓁ℯ  ℴ𝓃  𝓁𝒾𝒻ℯ.
+𝒾  𝓌𝒾𝓁𝓁  𝒽ℯ𝓁𝓅  𝓎ℴ𝓊  𝓂𝒶𝓃𝒶ℊℯ  𝓎ℴ𝓊𝓇  ℊ𝓇ℴ𝓊𝓅.
+𝒾  𝓌𝒶𝓈  𝓈𝓅ℯ𝒸𝒾𝒶𝓁𝓁𝓎  𝒸𝓇ℯ𝒶𝓉ℯ𝒹  𝒻ℴ𝓇  𝒹ℯ𝓋𝒾𝓁'𝓈  𝓉ℯ𝓇𝓇𝒾𝓉ℴ𝓇𝓎  .*
+To know my  commands, click the button below.
 """
 
-buttons = [
-    [
-        InlineKeyboardButton(
-            text="❔Hᴇʟᴘ & Cᴏᴍᴍᴀɴᴅꜱ ❔", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="👥 Gʀᴏᴜᴘ", url=f"https://t.me/SiderzChat"),
-        InlineKeyboardButton(
-            text="Cʜᴀɴɴᴇʟ 🔔", url=f"https://t.me/SiderzBot"
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="📜 Iɴꜰᴏʀᴍᴀᴛɪᴏɴ", callback_data="innexia_"),
-        InlineKeyboardButton(
-            text="Bᴏᴛ Lɪꜱᴛ 🤖", url=f"https://t.me/SiderzBot/9"
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="💕 Sᴜᴍᴍᴏɴ Mᴇ 💕", url="http://t.me/Innexiabot?startgroup=true"),
-    ],
-]
-
-
 HELP_STRINGS = """
-**SETTINGS**
-`Click on the buttons below to get documentation about specific modules..`)"""
+Hey there! My name is *{}*.
+I'm a Gambler who loves to play games of life ,I will help you manage your groups! Have a look at the following for an idea of some of \
+the things I can help you with. I Specially work for Devil's Territory.
+*Main* commands available:
+ • /help: PM's you this message.
+ • /help <module name>: PM's you info about that module.
+ • /settings:
+   • in PM: will send you your settings for all supported modules.
+   • in a group: will redirect you to pm, with all that chat's settings.
+{}
+And the following:
+""".format(
+    dispatcher.bot.first_name, ""
+    if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- @SiderzDonate's 💕"""
+Donate that to soem Charity💕"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -185,17 +181,6 @@ def start(update: Update, context: CallbackContext):
         if len(args) >= 1:
             if args[0].lower() == "help":
                 send_help(update.effective_chat.id, HELP_STRINGS)
-            elif args[0].lower().startswith("ghelp_"):
-                mod = args[0].lower().split("_", 1)[1]
-                if not HELPABLE.get(mod, False):
-                    return
-                send_help(
-                    update.effective_chat.id,
-                    HELPABLE[mod].__help__,
-                    InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="⬅️ BACK", callback_data="help_back")]]
-                    ),
-                )
 
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
@@ -210,20 +195,48 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            update.effective_message.reply_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_animation(
+                SAITAMA_IMG,
+                caption=PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-            )
+                reply_markup=InlineKeyboardMarkup(                   
+                          [[
+                              InlineKeyboardButton(
+                              text="🔥Add Yumeko To Your Group🔥",
+                              url="t.me/{}?startgroup=true".format(
+                                  context.bot.username))
+                          ], 
+                          [
+                              InlineKeyboardButton(
+                              text="⚙️Support Group⚙️",
+                              url=f"https://t.me/tae_support"),
+                              InlineKeyboardButton(
+                              text="📣Download Anime📣",
+                              url="https://t.me/Anime_English_Dub_Devil")
+                          ], 
+                          [
+                              InlineKeyboardButton(
+                              text="🔔Updates🔔",
+                              url=f"https://t.me/YumekoJabamiUpdates"),
+                              InlineKeyboardButton(
+                              text="🪦Gban🪦",
+                              url="https://t.me/yumekojabami_gban_logs")
+                          ], 
+                          [
+                              InlineKeyboardButton(
+                              text="🎊Devil's Territory🎊",
+                              url=f"https://t.me/Devils_Territory")
+                          ]])) 
     else:
+        update.effective_message.reply_video(
+               YUMEKOIMGSTART)
         update.effective_message.reply_text(
-            "👋 I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
-                uptime
-            ),
-            parse_mode=ParseMode.HTML,
-        )
-
+            "I'm ready to gamble!\n<b>Up since:</b> <code>{}</code>".format(uptime),
+            parse_mode=ParseMode.HTML)
+        
+        
+       
 
 def error_handler(update, context):
     """Log the error and send a telegram message to notify the developer."""
@@ -348,66 +361,6 @@ def help_button(update, context):
         pass
 
 
-@run_async
-def innexia_about_callback(update, context):
-    query = update.callback_query
-    if query.data == "innexia_":
-        query.message.edit_text(
-            text=""" **INNEXIA** it's online since 29 March 2021 and it's constantly updated!
-            \n**Bot Admins**
-            
-            \n• @useIes, bot creator and main developer.
-            \n• The Doctor, server manager and developer.
-            \n• Manuel 5, developer.
-            \n**Support**
-            \n• [Click here](t.me/BotDevlopers) to consult the updated list of Official Supporters of the bot.
-            \n• Thanks to all our **donors** for supporting server and development expenses and all those who have reported bugs or suggested new features.
-            \n• We also thank **all the groups** who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!""",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="Back", callback_data="innexia_back")
-                 ]
-                ]
-            ),
-        )
-    elif query.data == "innexia_back":
-        query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-        )
-
-
-@run_async
-def Source_about_callback(update, context):
-    query = update.callback_query
-    if query.data == "source_":
-        query.message.edit_text(
-            text=""" Hi..😻 I'm *Innexia*
-                 \nHere is the [🔥Source Code🔥](https://github.com/DarkCybers/innexiaBot) .""",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="Go Back", callback_data="source_back")
-                 ]
-                ]
-            ),
-        )
-    elif query.data == "source_back":
-        query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-        )
 
 @run_async
 def get_help(update: Update, context: CallbackContext):
@@ -684,7 +637,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "`Yes I'm Fine` 😹")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "`Yumeko is ready to Gamble Again!`")
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
@@ -710,8 +663,6 @@ def main():
     # dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
-    dispatcher.add_handler(about_callback_handler)
-    dispatcher.add_handler(source_callback_handler)
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
