@@ -21,7 +21,7 @@
   <summary>Heroku Deploy!! </summary>
   <br>Fill in the Vars and Done
   
-  <br>[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/DEVILTG/innexia) 
+  <br>[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/DEVILTG/yumeko2.0) 
 
   
   </details>
