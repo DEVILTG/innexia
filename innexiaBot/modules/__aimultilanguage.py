@@ -329,8 +329,8 @@ async def inuka(client, message):
     # test = emoji.demojize(test.strip())
 
     # Kang with the credits bitches @InukaASiTH
-    test = test.replace("innexia", "Aco")
-    test = test.replace("innexia", "Aco")
+    test = test.replace("yumeko", "Aco")
+    test = test.replace("yumeko", "Aco")
     URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@innexiaBot&ownername=@useIes"
     try:
         r = requests.request("GET", url=URL)
@@ -356,7 +356,7 @@ async def inuka(client, message):
 
 __help__ = """
 <b> Chatbot </b>
-innexia AI 3.0 IS THE ONLY AI SYSTEM WHICH CAN DETECT & REPLY UPTO 200 LANGUAGES
+Yumeko AI 3.0 IS THE ONLY AI SYSTEM WHICH CAN DETECT & REPLY UPTO 200 LANGUAGES
  - /chatbot [ON/OFF]: Enables and disables AI Chat mode (EXCLUSIVE)
  - /chatbot EN : Enables English only chatbot
  
