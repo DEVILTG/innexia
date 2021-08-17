@@ -181,7 +181,7 @@ def config(client, message):
 
 __help__ = """
 *Force Subscribe:*
-❍ Innexia can mute members who are not subscribed your channel until they subscribe
+❍ Yumeko can mute members who are not subscribed your channel until they subscribe
 ❍ When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
 *Setup*
 *Only creator*
@@ -190,7 +190,7 @@ __help__ = """
  
 *Commmands*
  ❍ /fsub {channel username} - To turn on and setup the channel.
-  💡Do this first...
+  `💡Do this first...`
  ❍ /fsub - To get the current settings.
  ❍ /fsub disable - To turn of ForceSubscribe..
   💡If you disable fsub, you need to set again for working.. /fsub {channel username} 
