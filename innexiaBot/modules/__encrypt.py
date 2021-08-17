@@ -24,3 +24,13 @@ async def hmm(event):
     Text = ok
     k = secureme.decrypt(Text)
     await event.reply(k)
+
+    
+__mod_name__ = "Secure"
+
+__help__ = """
+*Yumeko can Easily Encrypt and Decrypt Text*
+
+❍ /encrypt *:* Encrypt the Given Text.
+
+❍ /decrypt *:* Decrypt the Given Text.
