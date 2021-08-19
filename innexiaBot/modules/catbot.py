@@ -7,8 +7,8 @@ import innexiaBot.modules.sql.kuki_sql as sql
 
 from time import sleep
 from telegram import ParseMode
-from MashaRoBot import dispatcher, updater, SUPPORT_CHAT
-from MashaRoBot.modules.log_channel import gloggable
+from innexiaBot import dispatcher, updater, SUPPORT_CHAT
+from innexiaBot.modules.log_channel import gloggable
 from telegram import Message, Chat, Update, Bot, MessageEntity
 from telegram.error import BadRequest, RetryAfter, Unauthorized
 from telegram.ext import CommandHandler, run_async, CallbackContext, MessageHandler, Filters
