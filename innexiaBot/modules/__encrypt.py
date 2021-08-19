@@ -34,3 +34,4 @@ __help__ = """
 ❍ /encrypt *:* Encrypt the Given Text.
 
 ❍ /decrypt *:* Decrypt the Given Text.
+"""
